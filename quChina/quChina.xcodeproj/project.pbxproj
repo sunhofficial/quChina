@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C72F78B02B440CAF000A226C /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F78AF2B440CAF000A226C /* Triangle.swift */; };
+		C76593CD2B4A734300FE2A60 /* TranslateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */; };
+		C7918A842B408CF500947483 /* RateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7918A832B408CF500947483 /* RateService.swift */; };
+		C7A364F92B413EE700663BFD /* ExchangeRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */; };
+		C7A364FB2B414C6B00663BFD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364FA2B414C6B00663BFD /* NetworkError.swift */; };
+		C7A364FE2B415D7300663BFD /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364FD2B415D7300663BFD /* Endpoint.swift */; };
+		C7A365002B415E4000663BFD /* ChinaPriceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364FF2B415E4000663BFD /* ChinaPriceRequest.swift */; };
+		C7AECB2C2B42832F000F5424 /* TranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AECB2B2B42832F000F5424 /* TranslateView.swift */; };
+		C7AECB2E2B429BFC000F5424 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AECB2D2B429BFC000F5424 /* Date+.swift */; };
+		C7AECB302B429E5E000F5424 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AECB2F2B429E5E000F5424 /* String+.swift */; };
 		C7BDE0202B401D0A00F20624 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDE01F2B401D0A00F20624 /* MainTabView.swift */; };
 		C7BDE0232B401D2F00F20624 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDE0222B401D2F00F20624 /* RateView.swift */; };
 		C7BDE0252B401D4500F20624 /* RateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDE0242B401D4500F20624 /* RateViewModel.swift */; };
 		C7BDE0282B40596000F20624 /* SecretKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7BDE0272B40596000F20624 /* SecretKey.plist */; };
 		C7BDE02A2B405ACF00F20624 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDE0292B405ACF00F20624 /* Bundle+.swift */; };
+		C7BDE02D2B4061FE00F20624 /* RateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDE02C2B4061FE00F20624 /* RateDTO.swift */; };
 		C7C35CA32B3F2D400079DBFF /* quChinaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35CA22B3F2D400079DBFF /* quChinaApp.swift */; };
 		C7C35CA52B3F2D400079DBFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35CA42B3F2D400079DBFF /* ContentView.swift */; };
 		C7C35CA72B3F2D410079DBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C35CA62B3F2D410079DBFF /* Assets.xcassets */; };
@@ -21,11 +32,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C72F78AF2B440CAF000A226C /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewModel.swift; sourceTree = "<group>"; };
+		C7918A832B408CF500947483 /* RateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateService.swift; sourceTree = "<group>"; };
+		C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateModel.swift; sourceTree = "<group>"; };
+		C7A364FA2B414C6B00663BFD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		C7A364FD2B415D7300663BFD /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		C7A364FF2B415E4000663BFD /* ChinaPriceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinaPriceRequest.swift; sourceTree = "<group>"; };
+		C7AECB2B2B42832F000F5424 /* TranslateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateView.swift; sourceTree = "<group>"; };
+		C7AECB2D2B429BFC000F5424 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		C7AECB2F2B429E5E000F5424 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		C7BDE01F2B401D0A00F20624 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		C7BDE0222B401D2F00F20624 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		C7BDE0242B401D4500F20624 /* RateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateViewModel.swift; sourceTree = "<group>"; };
 		C7BDE0272B40596000F20624 /* SecretKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecretKey.plist; sourceTree = "<group>"; };
 		C7BDE0292B405ACF00F20624 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
+		C7BDE02C2B4061FE00F20624 /* RateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDTO.swift; sourceTree = "<group>"; };
 		C7C35C9F2B3F2D400079DBFF /* quChina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quChina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C35CA22B3F2D400079DBFF /* quChinaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quChinaApp.swift; sourceTree = "<group>"; };
 		C7C35CA42B3F2D400079DBFF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +68,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7A364FC2B415D5A00663BFD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C7A364FD2B415D7300663BFD /* Endpoint.swift */,
+				C7A364FF2B415E4000663BFD /* ChinaPriceRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C7AECB2A2B428323000F5424 /* Translate */ = {
+			isa = PBXGroup;
+			children = (
+				C7AECB2B2B42832F000F5424 /* TranslateView.swift */,
+				C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */,
+			);
+			path = Translate;
+			sourceTree = "<group>";
+		};
 		C7BDE0212B401D2100F20624 /* Rate */ = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +93,14 @@
 				C7BDE0242B401D4500F20624 /* RateViewModel.swift */,
 			);
 			path = Rate;
+			sourceTree = "<group>";
+		};
+		C7BDE02B2B4060FC00F20624 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				C7BDE02C2B4061FE00F20624 /* RateDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		C7C35C962B3F2D400079DBFF = {
@@ -77,6 +125,7 @@
 			children = (
 				C7C35CB42B3F2E9A0079DBFF /* Resource */,
 				C7C35CB32B3F2E8A0079DBFF /* Models */,
+				C7A364FC2B415D5A00663BFD /* Network */,
 				C7C35CB22B3F2E580079DBFF /* Service */,
 				C7C35CB12B3F2E500079DBFF /* Extensions */,
 				C7C35CB02B3F2E490079DBFF /* Views */,
@@ -98,8 +147,10 @@
 		C7C35CB02B3F2E490079DBFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7AECB2A2B428323000F5424 /* Translate */,
 				C7BDE0212B401D2100F20624 /* Rate */,
 				C7BDE01F2B401D0A00F20624 /* MainTabView.swift */,
+				C72F78AF2B440CAF000A226C /* Triangle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +160,8 @@
 			children = (
 				C7C35CB72B3F30D70079DBFF /* Color+.swift */,
 				C7BDE0292B405ACF00F20624 /* Bundle+.swift */,
+				C7AECB2F2B429E5E000F5424 /* String+.swift */,
+				C7AECB2D2B429BFC000F5424 /* Date+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -116,6 +169,8 @@
 		C7C35CB22B3F2E580079DBFF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				C7918A832B408CF500947483 /* RateService.swift */,
+				C7A364FA2B414C6B00663BFD /* NetworkError.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -123,6 +178,8 @@
 		C7C35CB32B3F2E8A0079DBFF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C7BDE02B2B4060FC00F20624 /* DTO */,
+				C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,12 +265,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A364F92B413EE700663BFD /* ExchangeRateModel.swift in Sources */,
 				C7C35CA52B3F2D400079DBFF /* ContentView.swift in Sources */,
 				C7BDE02A2B405ACF00F20624 /* Bundle+.swift in Sources */,
+				C76593CD2B4A734300FE2A60 /* TranslateViewModel.swift in Sources */,
 				C7BDE0232B401D2F00F20624 /* RateView.swift in Sources */,
+				C7918A842B408CF500947483 /* RateService.swift in Sources */,
+				C7AECB2C2B42832F000F5424 /* TranslateView.swift in Sources */,
+				C72F78B02B440CAF000A226C /* Triangle.swift in Sources */,
+				C7BDE02D2B4061FE00F20624 /* RateDTO.swift in Sources */,
+				C7AECB302B429E5E000F5424 /* String+.swift in Sources */,
 				C7C35CB82B3F30D70079DBFF /* Color+.swift in Sources */,
 				C7C35CA32B3F2D400079DBFF /* quChinaApp.swift in Sources */,
 				C7BDE0252B401D4500F20624 /* RateViewModel.swift in Sources */,
+				C7A364FB2B414C6B00663BFD /* NetworkError.swift in Sources */,
+				C7A364FE2B415D7300663BFD /* Endpoint.swift in Sources */,
+				C7AECB2E2B429BFC000F5424 /* Date+.swift in Sources */,
+				C7A365002B415E4000663BFD /* ChinaPriceRequest.swift in Sources */,
 				C7BDE0202B401D0A00F20624 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

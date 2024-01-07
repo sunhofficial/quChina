@@ -7,10 +7,46 @@
 
 import SwiftUI
 
-struct MainTabView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+enum MainTabType: CaseIterable{
+    case wonchange
+    case voice
+
+    var title: String {
+        switch self {
+        case .wonchange:
+            "환율"
+        case .voice:
+            "음성인식"
+        }
     }
+
+    var labelImage: String {
+        switch self {
+        case .wonchange:
+            "wonsign.arrow.circlepath"
+        case .voice:
+            "waveform"
+        }
+    }
+}
+struct MainTabView: View {
+    @State private var tabState: MainTabType = .wonchange
+    var body: some View {
+        TabView(selection: $tabState) {
+            ForEach(MainTabType.allCases, id: \.self) { tab in
+                Group {
+                    switch tab {
+                    case .wonchange:
+                        RateView(viewModel: .init(rateService: RateService()))
+                    case .voice:
+                        TranslateView(viewModel: .init())
+                    }
+                }.tabItem { Label(tab.title, systemImage: tab.labelImage) }
+                    .tag(tab)
+            }
+        }
+    }
+
 }
 
 #Preview {
