@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C72F78B02B440CAF000A226C /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F78AF2B440CAF000A226C /* Triangle.swift */; };
+		C764A0152B4BFBAD00C03510 /* PapagoSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764A0142B4BFBAD00C03510 /* PapagoSevice.swift */; };
 		C76593CD2B4A734300FE2A60 /* TranslateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */; };
 		C7918A842B408CF500947483 /* RateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7918A832B408CF500947483 /* RateService.swift */; };
 		C7A364F92B413EE700663BFD /* ExchangeRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		C72F78AF2B440CAF000A226C /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		C764A0142B4BFBAD00C03510 /* PapagoSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapagoSevice.swift; sourceTree = "<group>"; };
 		C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewModel.swift; sourceTree = "<group>"; };
 		C7918A832B408CF500947483 /* RateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateService.swift; sourceTree = "<group>"; };
 		C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateModel.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				C7918A832B408CF500947483 /* RateService.swift */,
+				C764A0142B4BFBAD00C03510 /* PapagoSevice.swift */,
 				C7A364FA2B414C6B00663BFD /* NetworkError.swift */,
 			);
 			path = Service;
@@ -283,6 +286,7 @@
 				C7AECB2E2B429BFC000F5424 /* Date+.swift in Sources */,
 				C7A365002B415E4000663BFD /* ChinaPriceRequest.swift in Sources */,
 				C7BDE0202B401D0A00F20624 /* MainTabView.swift in Sources */,
+				C764A0152B4BFBAD00C03510 /* PapagoSevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
