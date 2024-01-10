@@ -8,8 +8,8 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class RateViewModel: ObservableObject {
-
     @Published var searchPrice: Decimal? {
         didSet {
             self.changetoWon = (searchPrice ?? 1) * (rateWon ?? 180)

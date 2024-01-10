@@ -39,7 +39,7 @@ struct MainTabView: View {
                     case .wonchange:
                         RateView(viewModel: .init(rateService: RateService()))
                     case .voice:
-                        TranslateView(viewModel: .init())
+                        TranslateView(viewModel: .init(papagoSevice: PapagoSevice()))
                     }
                 }.tabItem { Label(tab.title, systemImage: tab.labelImage) }
                     .tag(tab)

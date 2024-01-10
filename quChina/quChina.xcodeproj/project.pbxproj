@@ -10,6 +10,7 @@
 		C72F78B02B440CAF000A226C /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F78AF2B440CAF000A226C /* Triangle.swift */; };
 		C764A0152B4BFBAD00C03510 /* PapagoSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764A0142B4BFBAD00C03510 /* PapagoSevice.swift */; };
 		C76593CD2B4A734300FE2A60 /* TranslateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */; };
+		C7916ABC2B4CEC7D00269FFD /* TranslationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7916ABB2B4CEC7D00269FFD /* TranslationDTO.swift */; };
 		C7918A842B408CF500947483 /* RateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7918A832B408CF500947483 /* RateService.swift */; };
 		C7A364F92B413EE700663BFD /* ExchangeRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */; };
 		C7A364FB2B414C6B00663BFD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A364FA2B414C6B00663BFD /* NetworkError.swift */; };
@@ -36,6 +37,7 @@
 		C72F78AF2B440CAF000A226C /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		C764A0142B4BFBAD00C03510 /* PapagoSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapagoSevice.swift; sourceTree = "<group>"; };
 		C76593CC2B4A734300FE2A60 /* TranslateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewModel.swift; sourceTree = "<group>"; };
+		C7916ABB2B4CEC7D00269FFD /* TranslationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationDTO.swift; sourceTree = "<group>"; };
 		C7918A832B408CF500947483 /* RateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateService.swift; sourceTree = "<group>"; };
 		C7A364F82B413EE700663BFD /* ExchangeRateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateModel.swift; sourceTree = "<group>"; };
 		C7A364FA2B414C6B00663BFD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				C7BDE02C2B4061FE00F20624 /* RateDTO.swift */,
+				C7916ABB2B4CEC7D00269FFD /* TranslationDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				C7AECB2C2B42832F000F5424 /* TranslateView.swift in Sources */,
 				C72F78B02B440CAF000A226C /* Triangle.swift in Sources */,
 				C7BDE02D2B4061FE00F20624 /* RateDTO.swift in Sources */,
+				C7916ABC2B4CEC7D00269FFD /* TranslationDTO.swift in Sources */,
 				C7AECB302B429E5E000F5424 /* String+.swift in Sources */,
 				C7C35CB82B3F30D70079DBFF /* Color+.swift in Sources */,
 				C7C35CA32B3F2D400079DBFF /* quChinaApp.swift in Sources */,

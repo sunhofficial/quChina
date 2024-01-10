@@ -20,4 +20,16 @@ extension Bundle {
             return value
         }
     }
+    var papagoIdKey: [String] {
+        get {
+            guard let filePath = Bundle.main.path(forResource: "SecretKey", ofType: "plist") else {
+                fatalError("plist못찾겠어용")
+            }
+            let plist = NSDictionary(contentsOfFile: filePath)
+            guard let id = plist?.object(forKey: "papago_ID") as? String, let key = plist?.object(forKey: "papago_Key") as? String else {
+                fatalError("id, key가있는거 맞아?")
+            }
+            return [id,key]
+        }
+    }
 }
