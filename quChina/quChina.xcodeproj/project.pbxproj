@@ -31,6 +31,7 @@
 		C7C35CAA2B3F2D410079DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C35CA92B3F2D410079DBFF /* Preview Assets.xcassets */; };
 		C7C35CB62B3F2ECB0079DBFF /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C35CB52B3F2ECB0079DBFF /* Colors.xcassets */; };
 		C7C35CB82B3F30D70079DBFF /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35CB72B3F30D70079DBFF /* Color+.swift */; };
+		C7C6D95F2B4F04E900EF1A3C /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C6D95E2B4F04E900EF1A3C /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		C7C35CA92B3F2D410079DBFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C7C35CB52B3F2ECB0079DBFF /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		C7C35CB72B3F30D70079DBFF /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		C7C6D95E2B4F04E900EF1A3C /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				C7918A832B408CF500947483 /* RateService.swift */,
 				C764A0142B4BFBAD00C03510 /* PapagoSevice.swift */,
 				C7A364FA2B414C6B00663BFD /* NetworkError.swift */,
+				C7C6D95E2B4F04E900EF1A3C /* SpeechRecognizer.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				C7C35CB82B3F30D70079DBFF /* Color+.swift in Sources */,
 				C7C35CA32B3F2D400079DBFF /* quChinaApp.swift in Sources */,
 				C7BDE0252B401D4500F20624 /* RateViewModel.swift in Sources */,
+				C7C6D95F2B4F04E900EF1A3C /* SpeechRecognizer.swift in Sources */,
 				C7A364FB2B414C6B00663BFD /* NetworkError.swift in Sources */,
 				C7A364FE2B415D7300663BFD /* Endpoint.swift in Sources */,
 				C7AECB2E2B429BFC000F5424 /* Date+.swift in Sources */,
@@ -427,6 +431,8 @@
 				DEVELOPMENT_TEAM = NG2NLR2Z86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -456,6 +462,8 @@
 				DEVELOPMENT_TEAM = NG2NLR2Z86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

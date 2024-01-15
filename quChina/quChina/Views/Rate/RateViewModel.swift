@@ -32,9 +32,11 @@ class RateViewModel: ObservableObject {
 
     func getWon() {
         rateService.getCurrentRate()
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
             } receiveValue: { [weak self] won in
+                print(won)
                 self?.rateWon = won
                 self?.changetoWon = (self?.searchPrice ?? 1) * (self?.rateWon!)!
             }.store(in: &subscriptions)

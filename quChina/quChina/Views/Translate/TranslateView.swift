@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum LanaguagesType: String {
+enum LanguagesType: String {
     case korean = "Korean"
     case chinese = "Chinese"
 
@@ -23,20 +23,25 @@ enum LanaguagesType: String {
 
 struct TranslateView: View {
     @StateObject var viewModel : TranslateViewModel
-    @FocusState private var focusField: LanaguagesType?
+    @FocusState private var focusField: LanguagesType?
     @FocusState private var chinesefocused: Bool
     var body: some View {
         VStack(spacing: 0) {
             lanaguageBoxView(langtype: .korean, text: $viewModel.koreanText, isFocused: _focusField) {
-              
+                Task {
+                    await viewModel.startSTT(lang:.korean)
+                }
             }
             Image(systemName: "arrow.up.arrow.down")
                 .resizable()
                 .frame(width: 32, height: 32)
                 .padding()
             lanaguageBoxView(langtype: .chinese, text: $viewModel.chineseText, isFocused: _focusField) {
-
+                Task {
+                    await viewModel.startSTT(lang:.korean)
+                }
             }
+            VoiceAnimationView(isSpeaking: $viewModel.isSpeaking)
         }.padding(.horizontal, 30)
             .onChange(of: focusField) { oldValue, newValue in
                 if oldValue == .korean {
@@ -53,11 +58,48 @@ extension TranslateView {
         case korean
         case chinese
     }
+    struct VoiceAnimationView: View {
+        @State private var firstcircleScale: CGFloat = 1.0
+        @Binding var isSpeaking: Bool
+        var body: some View {
+            if isSpeaking {
+                Button(action: {
+                    isSpeaking.toggle()
+                }, label: {
+                    ZStack {
+                        Circle()
+                            .frame(width: 60, height: 60)
+                            .scaleEffect(firstcircleScale)
+                            .foregroundStyle(Color.brandred)
+                            .blur(radius: 8.0)
+                            .opacity(0.8)
+                            .animation(.easeInOut(duration: 1).repeatForever(), value: firstcircleScale)
+                            .overlay {
+                                Circle()
+                                    .frame(width: 40, height: 40)
+                                    .scaleEffect(firstcircleScale)
+                                    .foregroundStyle(Color.brandred)
+                                    .blur(radius: 4.0)
+                                    .animation(.easeInOut(duration: 1).repeatForever(), value: firstcircleScale)
+                            }
+                            .onAppear {
+                                firstcircleScale = 1.5
+                            }
+                        Image(systemName: "pause.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundStyle(Color.brandred, Color.white)
+                    }
+                })
+            }
+
+
+        }
+    }
     struct lanaguageBoxView: View {
-        var langtype: LanaguagesType
+        var langtype: LanguagesType
         @Binding var text: String
-        @FocusState var isFocused: LanaguagesType?
-//        var isFocused: FocusState<LanaguagesType>.Binding
+        @FocusState var isFocused: LanguagesType?
         var onsubmit: () -> Void
         var body: some View {
             VStack(alignment: .leading) {
@@ -96,7 +138,7 @@ extension TranslateView {
         }
     }
 
-//
-//#Preview {
-//    TranslateView(viewModel: .init())
-//}
+
+#Preview {
+    TranslateView(viewModel: .init(papagoSevice: .init()))
+}
