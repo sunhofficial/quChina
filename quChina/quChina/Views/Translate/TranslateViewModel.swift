@@ -31,6 +31,10 @@ class TranslateViewModel: ObservableObject {
         isSpeaking.toggle()
         await speechSevice.startTranscribing(lang: lang)
     }
+
+    func resetSTT() async {
+        await speechSevice.stopTranscribing()
+    }
     func translateKorean() {
         papagoSevice.postTranslation(source: "ko", target: "zh-CN", text: koreanText)
             .sink { completion in

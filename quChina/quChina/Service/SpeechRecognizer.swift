@@ -40,8 +40,8 @@ final class SpeechRecognizer: ObservableObject {
     private var langRecognizer: SFSpeechRecognizer {
         currentlanguage == .chinese ?  SFSpeechRecognizer(locale: Locale(identifier: "zh-Hans-CN"))! : SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
     }
-//    private let koreanRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
-//    private let chineseRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "zh-Hans-CN"))!
+    //    private let koreanRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
+    //    private let chineseRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "zh-Hans-CN"))!
 
     /**
      Initializes a new speech recognizer. If this is the first time you've used the class, it
@@ -76,17 +76,18 @@ final class SpeechRecognizer: ObservableObject {
     }
 
     @MainActor func resetTranscript() {
-            reset()
+        reset()
     }
-    
+
     func changelang(lang: LanguagesType) async{
         currentlanguage = lang
     }
 
     @MainActor func stopTranscribing() {
-        Task {
-            audioEngine.stop
-        }
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        request?.endAudio()
+        self.request = nil
     }
 
     private func transcribe() async {
@@ -120,6 +121,7 @@ final class SpeechRecognizer: ObservableObject {
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self.request?.append(buffer)
         }
+
     }
     private func prepareRequest() {
         request = SFSpeechAudioBufferRecognitionRequest()

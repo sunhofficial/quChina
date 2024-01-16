@@ -27,7 +27,7 @@ struct TranslateView: View {
     @FocusState private var chinesefocused: Bool
     var body: some View {
         VStack(spacing: 0) {
-            lanaguageBoxView(langtype: .korean, text: $viewModel.koreanText, isFocused: _focusField) {
+            lanaguageBoxView(langtype: .korean, text: $viewModel.koreanText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
                 Task {
                     await viewModel.startSTT(lang:.korean)
                 }
@@ -36,12 +36,16 @@ struct TranslateView: View {
                 .resizable()
                 .frame(width: 32, height: 32)
                 .padding()
-            lanaguageBoxView(langtype: .chinese, text: $viewModel.chineseText, isFocused: _focusField) {
+            lanaguageBoxView(langtype: .chinese, text: $viewModel.chineseText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
                 Task {
-                    await viewModel.startSTT(lang:.korean)
+                    await viewModel.startSTT(lang:.chinese)
                 }
             }
-            VoiceAnimationView(isSpeaking: $viewModel.isSpeaking)
+            VoiceAnimationView(isSpeaking: $viewModel.isSpeaking) {
+                Task {
+                 await viewModel.resetSTT()
+                }
+            }
         }.padding(.horizontal, 30)
             .onChange(of: focusField) { oldValue, newValue in
                 if oldValue == .korean {
@@ -61,10 +65,12 @@ extension TranslateView {
     struct VoiceAnimationView: View {
         @State private var firstcircleScale: CGFloat = 1.0
         @Binding var isSpeaking: Bool
+        var ontapButton: () -> Void
         var body: some View {
             if isSpeaking {
                 Button(action: {
                     isSpeaking.toggle()
+                    ontapButton()
                 }, label: {
                     ZStack {
                         Circle()
@@ -92,14 +98,13 @@ extension TranslateView {
                     }
                 })
             }
-
-
         }
     }
     struct lanaguageBoxView: View {
         var langtype: LanguagesType
         @Binding var text: String
         @FocusState var isFocused: LanguagesType?
+        @Binding var isSpeaking: Bool
         var onsubmit: () -> Void
         var body: some View {
             VStack(alignment: .leading) {
@@ -125,6 +130,7 @@ extension TranslateView {
             .overlay {
                     Button {
                         onsubmit()
+                        isFocused = nil
                     } label: {
                         Image(systemName: "mic")
                             .resizable()
@@ -132,6 +138,7 @@ extension TranslateView {
                             .foregroundStyle(Color.gray)
                             .padding(.all, 24)
                     }
+                    .disabled(isSpeaking)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 }
             }
