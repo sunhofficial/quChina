@@ -18,6 +18,8 @@ struct RateView: View {
             resultView
                 .padding(.bottom, 130)
             priceInfoView
+        }.onTapGesture {
+            endTextEditing()
         }
     }
 }
@@ -26,9 +28,6 @@ extension RateView {
     var searchField: some View {
         TextField("Input 元", value: $viewModel.searchPrice, format: .currency(code: "CNY"))
             .keyboardType(.decimalPad)
-        //            .onSubmit {
-        //                viewModel.chinatoWon()
-        //            }
             .textFieldStyle(.roundedBorder)
     }
 

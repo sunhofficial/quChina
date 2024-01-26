@@ -10,9 +10,12 @@ import AVFoundation
 import Speech
 import SwiftUI
 
-
+protocol TTSProtocol {
+    func stopSpeaking()
+    func speechSentences(_ sentences: String, langType: LanguagesType)
+}
 /// A helper for transcribing speech to text using SFSpeechRecognizer and AVAudioEngine.
-final class SpeechRecognizer: ObservableObject {
+final class SpeechRecognizer: NSObject, ObservableObject, TTSProtocol {
     enum RecognizerError: Error {
         case nilRecognizer
         case notAuthorizedToRecognize
@@ -32,6 +35,9 @@ final class SpeechRecognizer: ObservableObject {
     @Published var koreanTranscript: String = ""
     @Published var chinesetranscript: String = ""
     @Published var isSpeeaking: Bool = false
+    @Published var isPlaying = false
+    private var speechSyntheizer: AVSpeechSynthesizer? = AVSpeechSynthesizer()
+    private let intervalOfWordAndmeanging = 0.2
     private let audioEngine: AVAudioEngine = AVAudioEngine()
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
@@ -47,7 +53,8 @@ final class SpeechRecognizer: ObservableObject {
      Initializes a new speech recognizer. If this is the first time you've used the class, it
      requests access to the speech recognizer and the microphone.
      */
-    init() {
+    override init() {
+        super.init()
         Task {
             do {
                 guard await SFSpeechRecognizer.hasAuthorizationToRecognize() else {
@@ -66,7 +73,19 @@ final class SpeechRecognizer: ObservableObject {
             transcribe(error)
         }
     }
+    func stopSpeaking() {
+        speechSyntheizer?.stopSpeaking(at: .immediate)
+        speechSyntheizer = nil
+        isPlaying = false
+    }
 
+    func speechSentences(_ sentences: String, langType: LanguagesType) {
+        let wordUtterance = AVSpeechUtterance(string: sentences)
+        wordUtterance.voice = AVSpeechSynthesisVoice(language: langType == .korean ? "ko-KR" : "zh-CN")
+        wordUtterance.postUtteranceDelay = intervalOfWordAndmeanging
+        speechSyntheizer?.speak(wordUtterance)
+    }
+    
     @MainActor func startTranscribing(lang : LanguagesType) {
         Task {
             reset()

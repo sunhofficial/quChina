@@ -42,7 +42,6 @@ class RateViewModel: ObservableObject {
             }.store(in: &subscriptions)
     }
 
-
     private func calculateYuantoWon() {
         guard let rate = rateWon else { return }
         for yuan in yuanLists {

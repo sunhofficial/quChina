@@ -31,6 +31,7 @@ enum MainTabType: CaseIterable{
 }
 struct MainTabView: View {
     @State private var tabState: MainTabType = .wonchange
+    private var papagoservice = PapagoSevice()
     var body: some View {
         TabView(selection: $tabState) {
             ForEach(MainTabType.allCases, id: \.self) { tab in
@@ -39,7 +40,7 @@ struct MainTabView: View {
                     case .wonchange:
                         RateView(viewModel: .init(rateService: RateService()))
                     case .voice:
-                        TranslateView(viewModel: .init(papagoSevice: PapagoSevice()))
+                        TranslateView(viewModel: .init(papagoSevice: papagoservice), papagoService: papagoservice)
                     }
                 }.tabItem { Label(tab.title, systemImage: tab.labelImage) }
                     .tag(tab)

@@ -7,53 +7,74 @@
 
 import SwiftUI
 
-enum LanguagesType: String {
-    case korean = "Korean"
-    case chinese = "Chinese"
 
-    var placeholderString: String {
-        switch self {
-        case .korean:
-            "번역하고 싶은 글자를 입력해주세요"
-        case .chinese:
-            "중국어를 입력해주세요"
-        }
-    }
-}
 
 struct TranslateView: View {
     @StateObject var viewModel : TranslateViewModel
     @FocusState private var focusField: LanguagesType?
     @FocusState private var chinesefocused: Bool
+    @State private var aiMode = false
+    @State private var goToCamera = false
+    var papagoService: PapagoSevice
     var body: some View {
-        VStack(spacing: 0) {
-            lanaguageBoxView(langtype: .korean, text: $viewModel.koreanText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
-                Task {
-                    await viewModel.startSTT(lang:.korean)
+        NavigationStack {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Spacer()
+                    if aiMode == true {
+                        TextField("", text: $viewModel.aimessage, prompt: Text("ex) 상하이 현지인들의 맛집을 알고싶어").font(.system(size: 12)))
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    Toggle("", isOn: $aiMode)
+                        .toggleStyle(AiCustomToggle())
+                }
+                noticeTextView
+                lanaguageBoxView(langtype: .korean, text: $viewModel.koreanText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
+                    Task {
+                        try await viewModel.startSTT(lang:.korean, aimode: aiMode)
+                    }
+                } listeningAction: {
+                    viewModel.startTTS(lang: .korean)
+                }
+                Image(systemName: "arrow.up.arrow.down")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .padding()
+                lanaguageBoxView(langtype: .chinese, text: $viewModel.chineseText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
+                    Task {
+                        try await viewModel.startSTT(lang:.chinese, aimode: aiMode)
+                    }
+                } listeningAction: {
+                    viewModel.startTTS(lang: .chinese)
+                }
+                Spacer()
+                VoiceAnimationView(isSpeaking: $viewModel.isSpeaking) {
+                    Task {
+                        await viewModel.resetSTT()
+                    }
                 }
             }
-            Image(systemName: "arrow.up.arrow.down")
-                .resizable()
-                .frame(width: 32, height: 32)
-                .padding()
-            lanaguageBoxView(langtype: .chinese, text: $viewModel.chineseText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
-                Task {
-                    await viewModel.startSTT(lang:.chinese)
+            .onTapGesture {
+                endTextEditing()
+            }.padding(.horizontal, 30)
+                .onChange(of: focusField) { oldValue, newValue in
+                    if oldValue == .korean {
+                        viewModel.translateKorean()
+                    } else if oldValue == .chinese{
+                        viewModel.translateChinese()
+                    }
+                }.navigationDestination(isPresented: $goToCamera) {
+                    LiveTextView(papagoService: papagoService)
                 }
-            }
-            VoiceAnimationView(isSpeaking: $viewModel.isSpeaking) {
-                Task {
-                 await viewModel.resetSTT()
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {goToCamera.toggle()}, label: {
+                            Image(systemName: "camera.viewfinder")
+                        })
+                    }
                 }
-            }
-        }.padding(.horizontal, 30)
-            .onChange(of: focusField) { oldValue, newValue in
-                if oldValue == .korean {
-                    viewModel.translateKorean()
-                } else if oldValue == .chinese{
-                    viewModel.translateChinese()
-                }
-            }
+        }
+
     }
 }
 
@@ -100,12 +121,24 @@ extension TranslateView {
             }
         }
     }
+
+    @ViewBuilder
+    var noticeTextView: some View {
+        if aiMode == true {
+            HStack {
+                Text("중국어를 입력하면 자동으로 다음 대화를 추천해줍니다.")
+                    .font(.system(size: 12))
+                Spacer()
+            }.padding(10)
+        }
+    }
     struct lanaguageBoxView: View {
         var langtype: LanguagesType
         @Binding var text: String
         @FocusState var isFocused: LanguagesType?
         @Binding var isSpeaking: Bool
-        var onsubmit: () -> Void
+        var speakingAction: () -> Void
+        var listeningAction: () -> Void
         var body: some View {
             VStack(alignment: .leading) {
                 Text(langtype.rawValue)
@@ -124,28 +157,83 @@ extension TranslateView {
                         .focused($isFocused, equals: langtype)
                         .opacity(text.isEmpty ? 0.25 : 1)
                 }
-            }.frame(height: 200)
+            }.frame(height: 160)
             .overlay(Divider(), alignment: .top)
             .overlay(Divider(), alignment: .bottom)
+            .onChange(of: text) { old, new in
+                       if !text.filter({ $0.isNewline }).isEmpty {
+                           isFocused = nil
+                       }
+                   }
             .overlay {
-                    Button {
-                        onsubmit()
-                        isFocused = nil
-                    } label: {
-                        Image(systemName: "mic")
-                            .resizable()
-                            .frame(width: 24, height: 24,  alignment: .trailing)
-                            .foregroundStyle(Color.gray)
-                            .padding(.all, 24)
+                VStack {
+                    Spacer()
+                    HStack(spacing: 0) {
+                        Spacer()
+                        Button {
+                            listeningAction()
+                            isFocused = nil
+                        } label: {
+                            Image(systemName: "speaker.wave.3")
+                                .resizable()
+                                .frame(width: 24, height: 24,  alignment: .trailing)
+                                .foregroundStyle(Color.gray)
+                                .padding(.all, 8)
+                        }
+                        Button {
+                            speakingAction()
+                            isFocused = nil
+                        } label: {
+                            Image(systemName: "mic")
+                                .resizable()
+                                .frame(width: 24, height: 24,  alignment: .trailing)
+                                .foregroundStyle(Color.gray)
+                                .padding(.all, 8)
+                        }
+                        .disabled(isSpeaking)
                     }
-                    .disabled(isSpeaking)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                }
+                }}
             }
         }
     }
 
-
-#Preview {
-    TranslateView(viewModel: .init(papagoSevice: .init()))
+//
+//#Preview {
+//    TranslateView(viewModel: .init(papagoSevice: .init()))
+//}
+struct AiCustomToggle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        let isOn = configuration.isOn
+        return ZStack {
+            RoundedRectangle(cornerRadius: 17)
+                .strokeBorder(Color.white, lineWidth: 2)
+                .frame(width: 65, height: 25)
+                .background(isOn ? Color.blue : Color.gray)
+                .overlay(alignment: .leading) {
+                    Text(isOn ? "ON" : "OFF")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(Color.white)
+                        .offset(x: isOn ? 6 : 28)
+                        .padding(.trailing, 8)
+                }
+                .overlay(alignment: .leading) {
+                    Image("robot")
+                        .resizable()
+                        .foregroundStyle(Color.white)
+                        .frame(width: 15,height: 15)
+                        .clipShape(Circle())
+                        .rotationEffect(Angle.degrees(isOn ? 0 : 180))
+                        .offset(x: isOn ? 45 : 6)
+                }
+                .mask {
+                    RoundedRectangle(cornerRadius: 17)
+                        .frame(width: 65, height: 25)
+                }
+        }
+        .onTapGesture {
+            withAnimation {
+                configuration.isOn.toggle()
+            }
+        }
+    }
 }
