@@ -12,6 +12,7 @@ import Combine
 struct LiveTextView: UIViewControllerRepresentable {
     static let textDataType: DataScannerViewController.RecognizedDataType = .text(languages: ["zh-Hans-CN"])
     @EnvironmentObject var container: DIContainer
+    @Binding var isVoiceOn: Bool
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
 
     }
@@ -31,10 +32,11 @@ struct LiveTextView: UIViewControllerRepresentable {
         return scannerViewController
     }
     static func dismantleUIViewController(_ uiViewController: DataScannerViewController, coordinator: Coordinator) {
+        coordinator.container.services.speechRecognizer.stopSpeaking()
         uiViewController.stopScanning()
     }
     func makeCoordinator() -> Coordinator {
-        return Coordinator(self, container: container)
+        return Coordinator(self, container: container, isVoiceOn: $isVoiceOn)
     }
     class Coordinator: NSObject, DataScannerViewControllerDelegate{
         var parent: LiveTextView
@@ -42,14 +44,17 @@ struct LiveTextView: UIViewControllerRepresentable {
         var touchedItems: [RecognizedItem] = []
         var roundBoxMappings: [UUID: UIView] = [:]
         private var subscriptions = Set<AnyCancellable>()
-//        @Binding var touchItem: RecognizedItem
-        init(_ parent: LiveTextView, container: DIContainer) {
+        @Binding var isVoiceOn: Bool
+
+        init(_ parent: LiveTextView, container: DIContainer, isVoiceOn: Binding<Bool>) {
             self.parent = parent
             self.container = container
-//            self._touchItem  = touchItem
+            self._isVoiceOn = isVoiceOn
         }
         func labelDidTap(_ text: String)  {
-            container.services.speechRecognizer.speechSentences(text, langType: .chinese)
+            if isVoiceOn {
+                container.services.speechRecognizer.speechSentences(text, langType: .chinese)
+            }
         }
         // DataScannerViewControllerDelegate - methods starts here
          func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {

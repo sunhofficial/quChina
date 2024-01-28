@@ -10,7 +10,7 @@ import SwiftUI
 struct LiveVideoView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var vm: LiveViewViewModel
-    @State private var canOpen: Bool = true
+    @State private var voiceOn: Bool = true
     private var alertMessage: String {
         switch vm.datascannerAccessStatus {
         case .notDetermined:
@@ -27,7 +27,6 @@ struct LiveVideoView: View {
     }
     var body: some View {
         switch vm.datascannerAccessStatus {
-
         case .scannerAvailable:
             mainView
         default:
@@ -40,9 +39,18 @@ struct LiveVideoView: View {
         }
 
     private var mainView: some View {
-        LiveTextView()
+        LiveTextView(isVoiceOn: $voiceOn)
             .background {
                 Color.gray.opacity(0.2)
+            }
+            .overlay {
+                VStack {
+                    Spacer()
+                        .frame(width: 40,height: 40)
+                    Toggle("", isOn: $voiceOn)
+                        .toggleStyle(CustomToggleStyle(imageString: "voice"))
+                    Spacer()
+                }
             }
             .ignoresSafeArea()
     }
