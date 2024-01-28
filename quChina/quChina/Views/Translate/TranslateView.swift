@@ -15,7 +15,7 @@ struct TranslateView: View {
     @FocusState private var chinesefocused: Bool
     @State private var aiMode = false
     @State private var goToCamera = false
-    var papagoService: PapagoSevice
+    @EnvironmentObject var container: DIContainer
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -64,7 +64,7 @@ struct TranslateView: View {
                         viewModel.translateChinese()
                     }
                 }.navigationDestination(isPresented: $goToCamera) {
-                    LiveTextView(papagoService: papagoService)
+                    LiveVideoView(vm: .init())
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -197,10 +197,6 @@ extension TranslateView {
         }
     }
 
-//
-//#Preview {
-//    TranslateView(viewModel: .init(papagoSevice: .init()))
-//}
 struct AiCustomToggle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         let isOn = configuration.isOn
