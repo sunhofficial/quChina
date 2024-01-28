@@ -10,6 +10,8 @@
 		C716516A2B661EC100D412BB /* LiveVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71651692B661EC100D412BB /* LiveVideoView.swift */; };
 		C716516C2B661FC300D412BB /* LiveViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716516B2B661FC300D412BB /* LiveViewViewModel.swift */; };
 		C716516F2B662C5C00D412BB /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716516E2B662C5C00D412BB /* CustomToggleStyle.swift */; };
+		C71651722B66661C00D412BB /* SaveStoargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71651712B66661C00D412BB /* SaveStoargeView.swift */; };
+		C71651742B66688000D412BB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71651732B66688000D412BB /* CardView.swift */; };
 		C72F78B02B440CAF000A226C /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F78AF2B440CAF000A226C /* Triangle.swift */; };
 		C72F93242B582F8D006D71A2 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F93232B582F8D006D71A2 /* View+.swift */; };
 		C73460732B5D03070056EED8 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = C73460722B5D03070056EED8 /* OpenAI */; };
@@ -53,6 +55,8 @@
 		C71651692B661EC100D412BB /* LiveVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveVideoView.swift; sourceTree = "<group>"; };
 		C716516B2B661FC300D412BB /* LiveViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewViewModel.swift; sourceTree = "<group>"; };
 		C716516E2B662C5C00D412BB /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
+		C71651712B66661C00D412BB /* SaveStoargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveStoargeView.swift; sourceTree = "<group>"; };
+		C71651732B66688000D412BB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C72F78AF2B440CAF000A226C /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		C72F93232B582F8D006D71A2 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		C73460742B5D06CD0056EED8 /* AiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiDTO.swift; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 				C716516E2B662C5C00D412BB /* CustomToggleStyle.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		C71651702B665CCC00D412BB /* Save */ = {
+			isa = PBXGroup;
+			children = (
+				C71651712B66661C00D412BB /* SaveStoargeView.swift */,
+				C71651732B66688000D412BB /* CardView.swift */,
+			);
+			path = Save;
 			sourceTree = "<group>";
 		};
 		C7A364FC2B415D5A00663BFD /* Network */ = {
@@ -194,6 +207,7 @@
 		C7C35CB02B3F2E490079DBFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C71651702B665CCC00D412BB /* Save */,
 				C716516D2B662C4C00D412BB /* Common */,
 				C7CB193B2B5AE4C100D730DD /* LiveText */,
 				C7AECB2A2B428323000F5424 /* Translate */,
@@ -353,12 +367,14 @@
 				C7C35CA52B3F2D400079DBFF /* ContentView.swift in Sources */,
 				C7BDE02A2B405ACF00F20624 /* Bundle+.swift in Sources */,
 				C76593CD2B4A734300FE2A60 /* TranslateViewModel.swift in Sources */,
+				C71651742B66688000D412BB /* CardView.swift in Sources */,
 				C798C1E52B60C9AD00602BB2 /* RoundRectLabel.swift in Sources */,
 				C7BDE0232B401D2F00F20624 /* RateView.swift in Sources */,
 				C73460772B5D06F30056EED8 /* AiService.swift in Sources */,
 				C716516A2B661EC100D412BB /* LiveVideoView.swift in Sources */,
 				C7918A842B408CF500947483 /* RateService.swift in Sources */,
 				C7AECB2C2B42832F000F5424 /* TranslateView.swift in Sources */,
+				C71651722B66661C00D412BB /* SaveStoargeView.swift in Sources */,
 				C72F78B02B440CAF000A226C /* Triangle.swift in Sources */,
 				C7BDE02D2B4061FE00F20624 /* RateDTO.swift in Sources */,
 				C7916ABC2B4CEC7D00269FFD /* TranslationDTO.swift in Sources */,
