@@ -10,23 +10,23 @@ struct CardView: View {
     var chinaText: String
     var koreanText: String
     var touchSpeaker: () -> Void
+    private let pasteboard = UIPasteboard.general
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
-                ZStack {
                     Text(chinaText)
                         .foregroundStyle(Color.white)
                         .font(.system(size: 24, weight: .semibold))
-                        .frame(width: 270, height: 72)
+                        .frame(width: 180, height: 72)
                         .background(Color.brandred)
                         .overlay {
                             HStack{
                                 Spacer()
                                 VStack {
                                     Button(action: {
-                                        
+                                        pasteboard.string = chinaText
                                     }, label: {
-                                        Image(systemName: "pencil")
+                                        Image(systemName: "doc.on.clipboard")
                                             .resizable()
                                             .foregroundStyle(Color.white)
                                             .frame(width: 16,height: 16)
@@ -47,7 +47,7 @@ struct CardView: View {
                                 }}
                         }
                     
-                }
+
                 Text(koreanText)
                     .font(.system(size: 16))
                     .padding(.all, 8)

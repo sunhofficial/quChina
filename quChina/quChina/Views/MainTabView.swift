@@ -41,7 +41,7 @@ struct MainTabView: View {
                     case .wonchange:
                         RateView(viewModel: .init(rateService: RateService()))
                     case .voice:
-                        TranslateView(viewModel: .init(papagoSevice: papagoservice))
+                        TranslateView(viewModel: .init(container: container))
                             .environmentObject(container)
                     }
                 }.tabItem { Label(tab.title, systemImage: tab.labelImage) }

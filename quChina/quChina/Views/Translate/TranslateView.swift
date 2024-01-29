@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct TranslateView: View {
+
     @StateObject var viewModel : TranslateViewModel
     @FocusState private var focusField: LanguagesType?
     @FocusState private var chinesefocused: Bool
@@ -82,6 +83,21 @@ extension TranslateView {
     enum FocusedField: Hashable {
         case korean
         case chinese
+    }
+    var saveButton: some View {
+        Button(action: {
+            viewModel.save()
+        }, label: {
+            HStack {
+                Image(systemName: "star")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .foregroundStyle(.white)
+                Text("Save")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(.white)
+            }.background(Color.redBrand)
+        })
     }
     struct VoiceAnimationView: View {
         @State private var firstcircleScale: CGFloat = 1.0
