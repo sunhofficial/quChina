@@ -13,12 +13,17 @@ struct RateView: View {
     var body: some View {
         VStack(spacing: 0) {
             searchField
-                .padding()
+                .padding(.horizontal, 8)
             Divider()
+                .padding(.horizontal, 8)
             resultView
-                .padding(.bottom, 130)
+                .padding(.all, 8)
+            Spacer()
+                .frame(width: 0, height: 64)
             priceInfoView
-        }.onTapGesture {
+        }
+        .background(Color.yellowlight)
+        .onTapGesture {
             endTextEditing()
         }
     }
@@ -29,6 +34,7 @@ extension RateView {
         TextField("Input 元", value: $viewModel.searchPrice, format: .currency(code: "CNY"))
             .keyboardType(.decimalPad)
             .textFieldStyle(.roundedBorder)
+        
     }
 
     var resultView: some View {
@@ -94,5 +100,12 @@ extension RateView {
 }
 
 #Preview {
-    RateView(viewModel: .init(rateService: .init()))
+    NavigationStack{
+        RateView(viewModel: .init(rateService: .init()))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("hi")
+                }
+            }}
 }

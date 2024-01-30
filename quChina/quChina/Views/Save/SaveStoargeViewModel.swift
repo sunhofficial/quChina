@@ -9,12 +9,6 @@ import SwiftUI
 
 class SaveStoargeViewModel: ObservableObject {
     @AppStorage("savedCard") var savedCard: [WordCard] = [
-        .init(id: .init(), chineseText: "hiuhi", koreanText: "hih"),
-        .init(id: .init(), chineseText: "xihuan", koreanText: "hih"),
-        .init(id: .init(), chineseText: "andil", koreanText: "hih"),
-        .init(id: .init(), chineseText: "hoiut", koreanText: "hih"),
-        .init(id: .init(), chineseText: "fuck", koreanText: "hih"),
-        .init(id: .init(), chineseText: "fuckyou", koreanText: "hih")
     ]
     private var container: DIContainer
     @Published var selectedCard: WordCard?
@@ -23,5 +17,17 @@ class SaveStoargeViewModel: ObservableObject {
     }
     func readChinese(_ card: WordCard) {
         container.services.speechRecognizer.speechSentences(card.chineseText, langType: .chinese)
+    }
+    func eraseCard(_ id: UUID) {
+        savedCard.removeAll {$0.id == id}
+        selectedCard = nil
+    }
+    func saveCard(card: WordCard) {
+        if let index = savedCard.firstIndex(where: { $0.id == card.id }) {
+              savedCard[index] = card
+          } else {
+              savedCard.append(card)
+          }
+        selectedCard = nil
     }
 }

@@ -13,6 +13,8 @@ class TranslateViewModel: ObservableObject {
     @Published var aimessage: String = ""
     @Published var isSpeaking: Bool = false
     @Published var isListening: Bool = false
+    @Published var succcessSave: Bool = false
+    @Published var currentLang: LanguagesType = .korean
     @AppStorage("savedCard") var savecards:  [WordCard] = []
     private var container: DIContainer
 
@@ -35,14 +37,21 @@ class TranslateViewModel: ObservableObject {
 
     func startSTT(lang: LanguagesType, aimode: Bool) async throws{
         isSpeaking.toggle()
+        currentLang = lang
         await container.services.speechRecognizer.startTranscribing(lang: lang)
         if aimode == true && lang == .chinese {
             try await container.services.aiService.sendPromptToGPT(message: "\(aimessage + chineseText)")
         }
     }
 
-    func resetSTT() async {
+    func resetSTT(lang: LanguagesType) async {
         await container.services.speechRecognizer.stopTranscribing()
+        switch lang {
+        case .korean:
+            translateKorean()
+        case .chinese:
+            translateChinese()
+        }
     }
 
     func startTTS(lang: LanguagesType) {
@@ -50,10 +59,12 @@ class TranslateViewModel: ObservableObject {
     }
     func stopTTS() {
         container.services.speechRecognizer.stopSpeaking()
+
     }
 
     func translateKorean() {
         container.services.papagoService.postTranslation(source: "ko", target: "zh-CN", text: koreanText)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
             } receiveValue: { [weak self] chinese in
@@ -62,6 +73,7 @@ class TranslateViewModel: ObservableObject {
     }
     func translateChinese() {
         container.services.papagoService.postTranslation(source: "zh-CN", target: "ko", text: chineseText)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
             } receiveValue: { [weak self] korean in
@@ -70,5 +82,7 @@ class TranslateViewModel: ObservableObject {
     }
     func save() {
         savecards.append(.init(id: .init(), chineseText: chineseText, koreanText: koreanText))
+        self.succcessSave = true
+
     }
 }

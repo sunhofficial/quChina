@@ -13,7 +13,6 @@ struct TranslateView: View {
 
     @StateObject var viewModel : TranslateViewModel
     @FocusState private var focusField: LanguagesType?
-    @FocusState private var chinesefocused: Bool
     @State private var aiMode = false
     @State private var goToCamera = false
     @EnvironmentObject var container: DIContainer
@@ -33,6 +32,7 @@ struct TranslateView: View {
                 lanaguageBoxView(langtype: .korean, text: $viewModel.koreanText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
                     Task {
                         try await viewModel.startSTT(lang:.korean, aimode: aiMode)
+                        focusField = nil
                     }
                 } listeningAction: {
                     viewModel.startTTS(lang: .korean)
@@ -44,14 +44,21 @@ struct TranslateView: View {
                 lanaguageBoxView(langtype: .chinese, text: $viewModel.chineseText, isFocused: _focusField, isSpeaking: $viewModel.isSpeaking) {
                     Task {
                         try await viewModel.startSTT(lang:.chinese, aimode: aiMode)
+                        focusField = nil
                     }
                 } listeningAction: {
                     viewModel.startTTS(lang: .chinese)
                 }
                 Spacer()
+                    .frame(width: 100, height: 60)
+                if !viewModel.isSpeaking {
+                    saveButton
+                }
+                Spacer()
+
                 VoiceAnimationView(isSpeaking: $viewModel.isSpeaking) {
                     Task {
-                        await viewModel.resetSTT()
+                        await viewModel.resetSTT(lang: viewModel.currentLang)
                     }
                 }
             }
@@ -73,6 +80,14 @@ struct TranslateView: View {
                             Image(systemName: "camera.viewfinder")
                         })
                     }
+                    ToolbarItem(placement: .principal) {
+                        Text("번역기능").font(.system(size: 16,weight: .bold))
+                    }
+                }.background(Color.yellowlight)
+                .alert("저장소에 보관완료", isPresented: $viewModel.succcessSave) {
+                    Button("OK") {
+                        viewModel.succcessSave.toggle()
+                    }
                 }
         }
 
@@ -92,11 +107,17 @@ extension TranslateView {
                 Image(systemName: "star")
                     .resizable()
                     .frame(width: 32, height: 32)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.pinkDark)
                 Text("Save")
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.white)
-            }.background(Color.redBrand)
+                    .foregroundStyle(.pinkDark)
+            }
+                .frame(width: 160, height: 52)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.pinkdark)
+                        .shadow(radius: 5)
+                }
         })
     }
     struct VoiceAnimationView: View {
@@ -148,6 +169,7 @@ extension TranslateView {
             }.padding(10)
         }
     }
+
     struct lanaguageBoxView: View {
         var langtype: LanguagesType
         @Binding var text: String
@@ -165,12 +187,12 @@ extension TranslateView {
                         TextEditor(text: .constant(langtype.placeholderString))
                             .focused($isFocused, equals: langtype)
                             .font(.body)
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.gray).background(Color.yellowlight)
                             .disabled(true)
                     }
                     TextEditor(text: $text)
                         .font(.body)
-                        .focused($isFocused, equals: langtype)
+                        .focused($isFocused, equals: langtype).background(Color.yellowlight)
                         .opacity(text.isEmpty ? 0.25 : 1)
                 }
             }.frame(height: 160)
