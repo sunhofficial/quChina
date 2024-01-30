@@ -9,21 +9,25 @@ import SwiftUI
 
 struct SaveStoargeView: View {
     @ObservedObject var viewModel: SaveStoargeViewModel
+    @State private var issavedComplete: Bool = false
     var colums = [GridItem(.adaptive(minimum: 160),spacing: 20)]
     var body: some View {
         NavigationStack{
-            ScrollView {
-                LazyVGrid(columns: colums , spacing: 20) {
-                    ForEach(viewModel.savedCard) {card in
-                        CardView(chinaText: card.chineseText, koreanText: card.koreanText) {
-                            viewModel.readChinese(card)
-                        }.padding(.vertical,8).onTapGesture {
-                            withAnimation {
-                                viewModel.selectedCard = card
+            ZStack {
+                ScrollView {
+                    LazyVGrid(columns: colums , spacing: 20) {
+                        ForEach(viewModel.savedCard) {card in
+                            CardView(chinaText: card.chineseText, koreanText: card.koreanText, isSavedComplete: $issavedComplete) {
+                                viewModel.readChinese(card)
+                            }.padding(.vertical,8).onTapGesture {
+                                withAnimation {
+                                    viewModel.selectedCard = card
+                                }
                             }
                         }
                     }
                 }
+                FadeAlertView(showAlert: $issavedComplete)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -32,14 +36,14 @@ struct SaveStoargeView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-
+                        
                     }, label: {
                         Image(systemName: "plus")
                             .foregroundStyle(Color.darkPurple)
                     })
                 }
             }
-            .sheet(item: $viewModel.selectedCard) { card in
+            .fullScreenCover(item: $viewModel.selectedCard) { card in
                 CardEditView(cardModel: card, eraseBtnTap: {
                     viewModel.eraseCard(card.id)
                 }, speakBtnTap: {

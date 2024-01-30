@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardEditView: View {
+    @Environment(\.dismiss) private var dismiss
     var cardModel: WordCard
     @State var chineseText: String
     @State var koreanText: String
@@ -26,61 +27,64 @@ struct CardEditView: View {
 
 
     var body: some View {
-        VStack(alignment: .leading){
-            TextField("", text: $chineseText)
-                .foregroundStyle(Color.white)
-                .font(.system(size: 32, weight: .semibold))
-                .padding(.vertical, 32)
-                .padding(.leading, 8)
-                .background(Color.brandred)
-                .overlay {
-                    HStack{
-                        Spacer()
-                        VStack {
-                            Button(action: {
-                                eraseBtnTap()
-                            }, label: {
-                                Image(systemName: "xmark.bin")
-                                    .resizable()
-                                    .foregroundStyle(Color.white)
-                                    .frame(width: 16,height: 16)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
-                            })
-                            Button(action: {
-//                                cardModel.updateCard(chineseText: chineseText, koreantext: koreanText)
-                                speakBtnTap()
-                            }, label: {
-                                Image(systemName: "speaker.wave.1")
-                                    .resizable()
-                                    .foregroundStyle(Color.white)
-                                    .frame(width: 16,height: 16)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
-                            })
-                        }}
-                }
+        ZStack{
+            Color.black.opacity(0.5).onTapGesture { dismiss() }
+            VStack(alignment: .leading){
+                TextField("", text: $chineseText)
+                    .foregroundStyle(Color.white)
+                    .font(.system(size: 32, weight: .semibold))
+                    .padding(.vertical, 32)
+                    .padding(.leading, 8)
+                    .background(Color.brandred)
+                    .overlay {
+                        HStack{
+                            Spacer()
+                            VStack {
+                                Button(action: {
+                                    eraseBtnTap()
+                                }, label: {
+                                    Image(systemName: "xmark.bin")
+                                        .resizable()
+                                        .foregroundStyle(Color.white)
+                                        .frame(width: 16,height: 16)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                })
+                                Button(action: {
+                                    //                                cardModel.updateCard(chineseText: chineseText, koreantext: koreanText)
+                                    speakBtnTap()
+                                }, label: {
+                                    Image(systemName: "speaker.wave.1")
+                                        .resizable()
+                                        .foregroundStyle(Color.white)
+                                        .frame(width: 16,height: 16)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                })
+                            }}
+                    }
 
-            TextEditor(text: $koreanText)
-                .font(.system(size: 16))
-                .padding(.horizontal, 8)
-            HStack {
-                Spacer()
-                Button(action: {
-                    checkBtnTap(chineseText, koreanText)
-                }, label: {
-                    Image(systemName: "checkmark.circle")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                })
-                Spacer()
+                TextEditor(text: $koreanText)
+                    .font(.system(size: 16))
+                    .padding(.horizontal, 8)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        checkBtnTap(chineseText, koreanText)
+                    }, label: {
+                        Image(systemName: "checkmark.circle")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    })
+                    Spacer()
+                }
             }
-        }
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(radius: 16)
-        .padding(.horizontal, 32)
-        .padding(.vertical, 248)
+            .frame(maxHeight: 320)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(radius: 16)
+            .padding(.horizontal, 32)
+        }.ignoresSafeArea()
     }
 }
 //extension CardEditView {

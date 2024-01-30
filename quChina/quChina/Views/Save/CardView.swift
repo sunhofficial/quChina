@@ -9,7 +9,9 @@ import SwiftUI
 struct CardView: View {
     var chinaText: String
     var koreanText: String
+    @Binding var isSavedComplete: Bool
     var touchSpeaker: () -> Void
+
     private let pasteboard = UIPasteboard.general
     var body: some View {
         ZStack {
@@ -24,7 +26,10 @@ struct CardView: View {
                                 Spacer()
                                 VStack {
                                     Button(action: {
+
                                         pasteboard.string = chinaText
+                                        isSavedComplete = true
+                                    
                                     }, label: {
                                         Image(systemName: "doc.on.clipboard")
                                             .resizable()
@@ -60,8 +65,8 @@ struct CardView: View {
     }
 }
 
-#Preview {
-    CardView(chinaText: "酸", koreanText: "음식을 처먹다") {
-        print("hi")
-    }
-}
+//#Preview {
+//    CardView(chinaText: "酸", koreanText: "음식을 처먹다") {
+//        print("hi")
+//    }
+//}
