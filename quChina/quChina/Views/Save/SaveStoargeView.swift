@@ -36,7 +36,7 @@ struct SaveStoargeView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        
+                        viewModel.selectedCard = .init(id: UUID(), chineseText: "", koreanText: "")
                     }, label: {
                         Image(systemName: "plus")
                             .foregroundStyle(Color.darkPurple)

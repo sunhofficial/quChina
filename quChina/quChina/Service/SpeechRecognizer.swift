@@ -151,7 +151,10 @@ final class SpeechRecognizer: NSObject, ObservableObject, TTSProtocol {
 
     private func prepareAudioSession() throws {
         let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
+        
+
+              try? audioSession.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+              try? audioSession.setMode(AVAudioSession.Mode.spokenAudio)
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
     }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct CardEditView: View {
     @Environment(\.dismiss) private var dismiss
     var cardModel: WordCard
+    @State private var keyboardHeight: CGFloat = 0
     @State var chineseText: String
     @State var koreanText: String
     var eraseBtnTap: (() -> Void)
@@ -28,8 +29,9 @@ struct CardEditView: View {
 
     var body: some View {
         ZStack{
-            Color.black.opacity(0.5).onTapGesture { dismiss() }
+            Color.black.opacity(0.5)
             VStack(alignment: .leading){
+
                 TextField("", text: $chineseText)
                     .foregroundStyle(Color.white)
                     .font(.system(size: 32, weight: .semibold))
@@ -51,7 +53,6 @@ struct CardEditView: View {
                                         .padding(.vertical, 8)
                                 })
                                 Button(action: {
-                                    //                                cardModel.updateCard(chineseText: chineseText, koreantext: koreanText)
                                     speakBtnTap()
                                 }, label: {
                                     Image(systemName: "speaker.wave.1")
@@ -74,17 +75,33 @@ struct CardEditView: View {
                     }, label: {
                         Image(systemName: "checkmark.circle")
                             .resizable()
-                            .frame(width: 40, height: 40)
+                            .frame(width: 48, height: 48)
+                            .padding(.bottom, 4)
                     })
                     Spacer()
                 }
+
             }
             .frame(maxHeight: 320)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 16)
             .padding(.horizontal, 32)
+            .offset(y: -keyboardHeight) // Offset based on keyboard height
         }.ignoresSafeArea()
+            .onAppear {
+                     NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
+                         if let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                             keyboardHeight = keyboardRect.height / 2
+                         }
+                     }
+                     NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+                         keyboardHeight = 0
+                     }
+                 }
+            .onDisappear {
+                      NotificationCenter.default.removeObserver(self)
+                  }
     }
 }
 //extension CardEditView {
