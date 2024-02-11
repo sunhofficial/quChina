@@ -9,7 +9,14 @@ import Foundation
 enum LanguagesType: String {
     case korean = "Korean"
     case chinese = "Chinese"
-
+    var langFlag: String {
+        switch self {
+        case .chinese:
+            "Chinese 🇨🇳"
+        case .korean:
+            "Korean 🇰🇷"
+        }
+    }
     var placeholderString: String {
         switch self {
         case .korean:

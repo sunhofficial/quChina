@@ -14,7 +14,7 @@ protocol TTSProtocol {
     func stopSpeaking()
     func speechSentences(_ sentences: String, langType: LanguagesType)
 }
-/// A helper for transcribing speech to text using SFSpeechRecognizer and AVAudioEngine.
+
 final class SpeechRecognizer: NSObject, ObservableObject, TTSProtocol {
     enum RecognizerError: Error {
         case nilRecognizer
@@ -46,13 +46,7 @@ final class SpeechRecognizer: NSObject, ObservableObject, TTSProtocol {
     private var langRecognizer: SFSpeechRecognizer {
         currentlanguage == .chinese ?  SFSpeechRecognizer(locale: Locale(identifier: "zh-Hans-CN"))! : SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
     }
-    //    private let koreanRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
-    //    private let chineseRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "zh-Hans-CN"))!
 
-    /**
-     Initializes a new speech recognizer. If this is the first time you've used the class, it
-     requests access to the speech recognizer and the microphone.
-     */
     override init() {
         super.init()
         Task {
@@ -155,7 +149,7 @@ final class SpeechRecognizer: NSObject, ObservableObject, TTSProtocol {
 
               try? audioSession.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
               try? audioSession.setMode(AVAudioSession.Mode.spokenAudio)
-        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        try audioSession.setActive(true, options: .notifyOthersOnDeactivation	)
     }
 
     nonisolated private func recognitionHandler(result: SFSpeechRecognitionResult?, error: Error?) {

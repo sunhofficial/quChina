@@ -78,6 +78,9 @@ struct TranslateView: View {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {goToCamera.toggle()}, label: {
                             Image(systemName: "camera.viewfinder")
+                                .resizable()
+                                .frame(width: 32, height: 32)
+                                .foregroundStyle(Color.black)
                         })
                     }
                     ToolbarItem(placement: .principal) {
@@ -107,16 +110,16 @@ extension TranslateView {
                 Image(systemName: "star")
                     .resizable()
                     .frame(width: 32, height: 32)
-                    .foregroundStyle(.pinkDark)
+                    .foregroundStyle(.redBrand)
                 Text("Save")
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.pinkDark)
+                    .foregroundStyle(.redBrand)
             }
                 .frame(width: 160, height: 52)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.pinkdark)
-                        .shadow(radius: 5)
+                        .stroke(Color.redBrand, lineWidth: 2)
+                        .shadow(radius: 10)
                 }
         })
     }
@@ -179,25 +182,26 @@ extension TranslateView {
         var listeningAction: () -> Void
         var body: some View {
             VStack(alignment: .leading) {
-                Text(langtype.rawValue)
+                Text(langtype.langFlag)
                     .font(.system(size: 14, weight: .medium))
                     .padding(.all, 8)
                 ZStack {
                     if text.isEmpty {
                         TextEditor(text: .constant(langtype.placeholderString))
+                            .clipShape(.rect(cornerRadius: 10))
                             .focused($isFocused, equals: langtype)
                             .font(.body)
                             .foregroundStyle(.gray).background(Color.yellowlight)
                             .disabled(true)
+
                     }
                     TextEditor(text: $text)
+                        .clipShape(.rect(cornerRadius: 10))
                         .font(.body)
                         .focused($isFocused, equals: langtype).background(Color.yellowlight)
                         .opacity(text.isEmpty ? 0.25 : 1)
                 }
             }.frame(height: 160)
-            .overlay(Divider(), alignment: .top)
-            .overlay(Divider(), alignment: .bottom)
             .onChange(of: text) { old, new in
                        if !text.filter({ $0.isNewline }).isEmpty {
                            isFocused = nil
