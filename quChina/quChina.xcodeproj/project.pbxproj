@@ -57,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C70BF1972B7C8CA300B05A5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C71651692B661EC100D412BB /* LiveVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveVideoView.swift; sourceTree = "<group>"; };
 		C716516B2B661FC300D412BB /* LiveViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewViewModel.swift; sourceTree = "<group>"; };
 		C716516E2B662C5C00D412BB /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 		C7C35CA12B3F2D400079DBFF /* quChina */ = {
 			isa = PBXGroup;
 			children = (
+				C70BF1972B7C8CA300B05A5B /* Info.plist */,
 				C7C35CB42B3F2E9A0079DBFF /* Resource */,
 				C7C35CB32B3F2E8A0079DBFF /* Models */,
 				C7E814342B6283CC00702EB6 /* Dependency */,
@@ -555,12 +557,12 @@
 				DEVELOPMENT_TEAM = NG2NLR2Z86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = quChina/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "For scanning the langauages";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -587,12 +589,12 @@
 				DEVELOPMENT_TEAM = NG2NLR2Z86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = quChina/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "For scanning the langauages";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식을 위해서 마이크 사용을 허가하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

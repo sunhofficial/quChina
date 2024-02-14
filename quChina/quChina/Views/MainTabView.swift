@@ -62,7 +62,7 @@ struct MainTabView: View {
                 }.tabItem { Label(tab.title, systemImage: tab.labelImage) }
                     .tag(tab)
             }
-        }
+        }.tint(Color.brandred)
     }
 
 }
